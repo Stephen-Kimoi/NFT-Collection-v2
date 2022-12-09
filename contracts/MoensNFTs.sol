@@ -8,7 +8,7 @@ import "hardhat/console.sol";
 
 import "hardhat/console.sol";
 
-abstract contract MoensNFT is ERC721 {
+contract MoensNFTs is ERC721 {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
 
@@ -23,14 +23,12 @@ abstract contract MoensNFT is ERC721 {
 
        tokenURI(itemId); 
 
-       _tokenIds.increment(); 
-
-       console.log("An NFT with ID of %s has been minted to %s", itemId, msg.sender); 
-       
+       _tokenIds.increment();     
     } 
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory){
        require(_exists(_tokenId)); 
+       console.log("An NFT with ID of %s has been minted to %s", _tokenId, msg.sender); 
        return " https://jsonkeeper.com/b/LGJK"; 
     } 
 }
