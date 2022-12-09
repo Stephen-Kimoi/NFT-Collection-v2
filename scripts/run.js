@@ -1,7 +1,14 @@
 async function main() {
-  const contractFactory = await hre.ethers.getContractFactory("MoensNFT"); 
+  const contractFactory = await hre.ethers.getContractFactory("MoensNFTs"); 
   const nftContract = await contractFactory.deploy(); 
   await nftContract.deployed(); 
+
+  let txn = await nftContract.mintNft(); 
+
+  await txn.wait(); 
+  
+  txn = await nftContract.mintNft(); 
+  await txn.wait(); 
 
   console.log("Contract deployed to: ", nftContract.address); 
 }
