@@ -7,8 +7,11 @@ async function main() {
 
   await txn.wait(); 
   
-  txn = await nftContract.mintNft(); 
-  await txn.wait(); 
+  await nftContract.pickRandomFirstWord(0); 
+
+  await nftContract.pickRandomSecondWord(1); 
+
+  await nftContract.pickRandomThirdWord(2); 
 
   console.log("Contract deployed to: ", nftContract.address); 
 }
