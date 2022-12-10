@@ -12,9 +12,21 @@ contract MoensNFTs is ERC721 {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
 
+    string[] wordsOne = ["Moen#1","Moen#2","Moen#3","Moen#4","Moen#5","Moen#6","Moen#7","Moen#8"]; 
+    string[] wordsTwo = ["Steve#1","Steve#2","Steve#3","Steve#4","Steve#5","Steve#6","Steve#7","Steve#8"]; 
+    string[] wordsThree = ["Don#1","Don#2","Don#3","Don#4","Don#5","Don#6","Don#7","Don#8"]; 
+
     constructor() ERC721("MoensNFT", "MFT"){
         console.log("I am about to create some NFTs!!"); 
     }
+
+    function pickRandomFirstWord(uint256 tokenId) public view returns(string memory){
+        uint256 randNum = random(string(abi.encodePacked("RANDOM", Strings.toString(tokenId)))); 
+        randNum = randNum % wordsOne.length; 
+        return wordsOne[randNum];  
+    }
+
+    
 
     function mintNft() public {
        uint256 itemId = _tokenIds.current(); 
