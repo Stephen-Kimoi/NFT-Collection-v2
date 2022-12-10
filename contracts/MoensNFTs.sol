@@ -21,12 +21,29 @@ contract MoensNFTs is ERC721 {
     }
 
     function pickRandomFirstWord(uint256 tokenId) public view returns(string memory){
-        uint256 randNum = random(string(abi.encodePacked("RANDOM", Strings.toString(tokenId)))); 
+        uint256 randNum = random(string(abi.encodePacked("RANDOM#1", Strings.toString(tokenId)))); 
         randNum = randNum % wordsOne.length; 
+        console.log("1st random number is: ", randNum); 
         return wordsOne[randNum];  
+    } 
+
+    function pickRandomSecondWord(uint256 tokenId) public view returns(string memory){
+        uint256 randNum = random(string(abi.encodePacked("RANDOM#2", Strings.toString(tokenId)))); 
+        randNum = randNum % wordsTwo.length; 
+        console.log("2nd random number is: ", randNum); 
+        return wordsTwo[randNum]; 
     }
 
-    
+    function pickRandomThirdWord(uint256 tokenId) public view returns(string memory){
+        uint256 randNum = random(string(abi.encodePacked("RANDOM#3", Strings.toString(tokenId)))); 
+        randNum = randNum % wordsThree.length; 
+        console.log("3rd random number is: ", randNum); 
+        return wordsThree[randNum]; 
+    }
+
+    function random(string memory input) internal pure returns(uint256) {
+        return uint256(keccak256(abi.encodePacked(input))); 
+    }    
 
     function mintNft() public {
        uint256 itemId = _tokenIds.current(); 
