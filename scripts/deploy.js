@@ -5,12 +5,12 @@ async function main() {
   
     let txn = await nftContract.mintNft(); 
   
-    // await txn.wait(); 
-    // console.log("Just minted NFT #1")
+    await txn.wait(); 
+    console.log("Just minted NFT #1")
     
-    // txn = await nftContract.mintNft(); 
-    // await txn.wait(); 
-    // console.log("Just minted NFT #2"); 
+    txn = await nftContract.mintNft(); 
+    await txn.wait(); 
+    console.log("Just minted NFT #2"); 
   
     console.log("Contract deployed to: ", nftContract.address); 
   }
