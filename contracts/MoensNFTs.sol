@@ -12,6 +12,8 @@ contract MoensNFTs is ERC721 {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
 
+    string baseSvg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
+
     string[] wordsOne = ["Moen#1","Moen#2","Moen#3","Moen#4","Moen#5","Moen#6","Moen#7","Moen#8"]; 
     string[] wordsTwo = ["Steve#1","Steve#2","Steve#3","Steve#4","Steve#5","Steve#6","Steve#7","Steve#8"]; 
     string[] wordsThree = ["Don#1","Don#2","Don#3","Don#4","Don#5","Don#6","Don#7","Don#8"]; 
@@ -47,6 +49,16 @@ contract MoensNFTs is ERC721 {
 
     function mintNft() public {
        uint256 itemId = _tokenIds.current(); 
+
+       string memory first = pickRandomFirstWord(itemId);
+       string memory second = pickRandomSecondWord(itemId);
+       string memory third = pickRandomThirdWord(itemId);
+
+       string memory finalSvg = string(abi.encodePacked(baseSvg, first, second, third, "</text></svg>")); 
+
+       console.log("\n------------------------------");
+       console.log(finalSvg); 
+       console.log("-------------------------------\n"); 
        
        _safeMint(msg.sender, itemId); 
 
