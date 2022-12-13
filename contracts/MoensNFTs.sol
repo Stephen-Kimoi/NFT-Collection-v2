@@ -3,12 +3,14 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
+import { Base64 } from "./libraries/Base64.sol";
 
 import "hardhat/console.sol";
 
-contract MoensNFTs is ERC721 {
+contract MoensNFTs is ERC721URIStorage {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
 
@@ -53,18 +55,39 @@ contract MoensNFTs is ERC721 {
        string memory first = pickRandomFirstWord(itemId);
        string memory second = pickRandomSecondWord(itemId);
        string memory third = pickRandomThirdWord(itemId);
+       string memory combinedWord = string(abi.encodePacked(first, second, third)); 
 
        string memory finalSvg = string(abi.encodePacked(baseSvg, first, second, third, "</text></svg>")); 
+      
+    // Encoding all JSON metadata in Base 64
+    string memory json = Base64.encode(
+        bytes(
+            string(
+                abi.encodePacked(
+                    '{"name": "',
+                    combinedWord,
+                    '", "description": "A highly acclaimed collection of squares.", "image": "data:image/svg+xml;base64,',
+                    Base64.encode(bytes(finalSvg)),
+                    '"}'
+                )
+            )
+        )
+    );
+       // Prepending all json data to data:application/json;base64
+       string memory finalTokenURI = string(
+           abi.encodePacked("data:application/json;base64,", json)
+       ); 
 
        console.log("\n------------------------------");
-       console.log(finalSvg); 
+       console.log(finalTokenURI); 
        console.log("-------------------------------\n"); 
        
        _safeMint(msg.sender, itemId); 
 
-       tokenURI(itemId); 
+       _setTokenURI(itemId, finalTokenURI);
 
        _tokenIds.increment();     
+       console.log("An NFT w/ ID %s has been minted to %s", itemId, msg.sender);
     } 
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory){
