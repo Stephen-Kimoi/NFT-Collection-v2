@@ -1,34 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './styles/App.css';
+import twitterLogo from './assets/twitter-logo.svg';
+import React from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+// Constants
+const TWITTER_HANDLE = 'stevekimoi';
+const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+const OPENSEA_LINK = '';
+const TOTAL_MINT_COUNT = 50;
+
+const App = () => {
+  // Render Methods
+  const renderNotConnectedContainer = () => (
+    <button className="cta-button connect-wallet-button">
+      Connect to Wallet
+    </button>
+  );
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container">
+        <div className="header-container">
+          <p className="header gradient-text">My NFT Collection</p>
+          <p className="sub-text">
+            Each unique. Each beautiful. Discover your NFT today.
+          </p>
+          {renderNotConnectedContainer()}
+        </div>
+        <div className="footer-container">
+          <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
+          <a
+            className="footer-text"
+            href={TWITTER_LINK}
+            target="_blank"
+            rel="noreferrer"
+          >{`built on @${TWITTER_HANDLE}`}</a>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
