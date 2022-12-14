@@ -59,20 +59,21 @@ contract MoensNFTs is ERC721URIStorage {
 
        string memory finalSvg = string(abi.encodePacked(baseSvg, first, second, third, "</text></svg>")); 
       
-    // Encoding all JSON metadata in Base 64
-    string memory json = Base64.encode(
-        bytes(
-            string(
-                abi.encodePacked(
-                    '{"name": "',
-                    combinedWord,
-                    '", "description": "A highly acclaimed collection of squares.", "image": "data:image/svg+xml;base64,',
-                    Base64.encode(bytes(finalSvg)),
-                    '"}'
+        // Encoding all JSON metadata in Base 64
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{"name": "',
+                        combinedWord,
+                        '", "description": "A highly acclaimed collection of squares.", "image": "data:image/svg+xml;base64,',
+                        Base64.encode(bytes(finalSvg)),
+                        '"}'
+                    )
                 )
             )
-        )
-    );
+        );
+        
        // Prepending all json data to data:application/json;base64
        string memory finalTokenURI = string(
            abi.encodePacked("data:application/json;base64,", json)
