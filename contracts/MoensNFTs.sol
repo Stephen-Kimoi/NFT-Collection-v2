@@ -5,19 +5,42 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
+import { Base64 } from "./libraries/Base64.sol"; 
 
-import "hardhat/console.sol";
 
 contract MoensNFTs is ERC721 {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
+    uint256 public _price = 0.01 ether; 
 
     constructor() ERC721("MoensNFT", "MFT"){
         console.log("I am about to create some NFTs!!"); 
     }
 
-    function mintNft() public {
-       uint256 itemId = _tokenIds.current(); 
+    function mintNft(uint256 id, string memory name, string memory description, string memory image) public payable {
+       uint256 itemId = _tokenIds.current();
+
+       require(msg.value >= _price, "Insufficient amount of Ether! Kindly top up.");  
+
+       string memory json = Base64.encode(
+           bytes(
+               string(
+                   abi.encodePacked(
+                       '{"name": "',name,
+                        '", "description": "',description,
+                        '", "image": "',image,
+                        // Base64.encode(bytes(finalSvg)),
+                        '"}'
+                   )
+               )
+           )
+       ); 
+
+       string memory finalTokenURI = string(
+           abi.encodePacked("data:application/json;base64,", json)
+       ); 
+
+       console.log("Final token URI is: ", finalTokenURI); 
        
        _safeMint(msg.sender, itemId); 
 
