@@ -12,19 +12,28 @@ const TOTAL_MINT_COUNT = 50;
 const App = () => {
   const [walletConnected, setWalletConnected] = useState(false); 
 
-
+  // Connect wallet
   const connectWallet = async () => {
-    const { ethereum } = window; 
+    console.log("Connecting wallet...")
+    try {
+      const { ethereum } = window; 
 
-    const accounts = await ethereum.request({method: "eth_requestAccounts"}); 
+    
+      const accounts = await ethereum.request({method: "eth_requestAccounts"}); 
 
-    const chainId = await ethereum.chainId; 
+      const chainId = await ethereum.chainId; 
 
-    if(chainId == 5){
+    if(chainId != 5){
       console.log("Kindly switch to metamask!"); 
     }
-
+    
+    console.log("Wallet connected successully..."); 
+    setWalletConnected(true); 
     return accounts[0]; 
+    } catch (error) {
+      console.error(error); 
+    }
+    
   }
   // Render Methods
   const renderNotConnectedContainer = () => (
@@ -35,7 +44,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="container">
+      <div className="container">football
         <div className="header-container">
           <p className="header gradient-text">My NFT Collection</p>
           <p className="sub-text">
