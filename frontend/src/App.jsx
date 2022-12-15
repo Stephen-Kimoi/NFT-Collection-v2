@@ -2,6 +2,7 @@ import './styles/App.css';
 // import twitterLogo from './assets/twitter-logo.svg';
 import React from "react";
 import { useState } from 'react';
+import { ethers } from 'hardhat';
 
 // Constants
 const TWITTER_HANDLE = 'stevekimoi';
@@ -35,6 +36,26 @@ const App = () => {
     }
     
   }
+
+  const getProviderOrSigner = async (needSigner) => {
+    const { ethereum } = window; 
+    
+    let signer; 
+    let provider; 
+
+    if(ethereum) {
+      provider = new ethers.providers.Web3Provider(ethereum); 
+
+      if(needSigner){
+        signer = provider.getSigner(); 
+        return signer; 
+      } else {
+        return provider; 
+      }
+    }
+  }
+
+  
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button className="cta-button connect-wallet-button" onClick={connectWallet}>
