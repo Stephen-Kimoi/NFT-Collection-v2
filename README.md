@@ -1,8 +1,9 @@
-# Sample Hardhat Project
+# NFT collection version 2 
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
 
-Try running some of the following tasks:
+
+
+need to do things a little bit quick 
 
 ```shell
 npx hardhat help
