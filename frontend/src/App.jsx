@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { ethers } from "ethers";
 import reactLogo from './assets/react.svg'
 import './styles/App.css'
+import { contractAbi, contractAddress } from '../constants'; 
 
 function App() {
   const [count, setCount] = useState(0); 
@@ -49,6 +51,27 @@ function App() {
     }
   }
 
+  const mintNft = async () => {
+    console.log("Minting an nft...")
+    try {
+      const signer = await getProviderOrSigner(true); 
+
+      const nftContract = new ethers.Contract(contractAddress, contractAbi, signer); 
+
+      const txn = await nftContract.mintNft(1, "Yay! by Steve", "Yay yay! The holidays are here", "https://imgur.com/j3CI7VT", {
+        value: ethers.utils.parseEther("0.01")
+      }); 
+
+      await txn.wait(); 
+
+      console.log("NFT minted successfully!"); 
+    } catch(error) { 
+      console.log("Sorry transaction failed...")
+      console.error(error); 
+    }
+
+  }
+
   
   // Render Methods
   // const renderNotConnectedContainer = () => (
@@ -80,7 +103,7 @@ function App() {
         } 
         {
           walletConnected && (
-            <button onClick={ () => console.log("Mint an NFT!")}>
+            <button onClick={mintNft}>
               Mint an NFT
             </button>
           )
