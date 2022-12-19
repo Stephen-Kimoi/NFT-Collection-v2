@@ -46,6 +46,8 @@ contract MoensNFTs is ERC721 {
 
        tokenURI(itemId); 
 
+       _setTokenUri(itemId, finalTokenURI); 
+
        _tokenIds.increment();     
     } 
 
