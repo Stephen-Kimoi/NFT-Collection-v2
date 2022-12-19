@@ -6,7 +6,7 @@ async function main() {
     const nftContract = await contractFactory.deploy(); 
     await nftContract.deployed(); 
   
-    let txn = await nftContract.mintNft(1, "SMH by Steve", "Oh shake my head!!", "https://imgur.com/ZzGpVtJ", {
+    let txn = await nftContract.mintNft(0, "Hi by Steve", "This is me saying hi to you", "https://imgur.com/j3CI7VT.png", {
     value: utils.parseEther("0.01")
     }); 
 
