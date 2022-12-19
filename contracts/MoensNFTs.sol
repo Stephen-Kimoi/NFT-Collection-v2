@@ -19,7 +19,10 @@ contract MoensNFTs is ERC721URIStorage {
     }
 
     function mintNft(uint256 id, string memory name, string memory description, string memory image) public payable {
-       uint256 itemId = _tokenIds.current();
+       // uint256 itemId = _tokenIds.current();
+
+       uint256 itemId = id;  
+
 
        require(msg.value >= _price, "Insufficient amount of Ether! Kindly top up.");  
 
@@ -29,7 +32,7 @@ contract MoensNFTs is ERC721URIStorage {
                    abi.encodePacked(
                        '{"name": "',name,
                         '", "description": "',description,
-                        '", "image": "',image,
+                        '", "image": "', Base64.encode(bytes(image)),
                         // Base64.encode(bytes(finalSvg)),
                         '"}'
                    )
@@ -53,8 +56,9 @@ contract MoensNFTs is ERC721URIStorage {
     } 
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory){
-       require(_exists(_tokenId)); 
+       require(_exists(_tokenId));  
+       
        console.log("An NFT with ID of %s has been minted to %s", _tokenId, msg.sender); 
-       return " https://jsonkeeper.com/b/LGJK"; 
-    } 
+       return "https://www.jsonkeeper.com/b/GYZ1";  
+    }   
 }
