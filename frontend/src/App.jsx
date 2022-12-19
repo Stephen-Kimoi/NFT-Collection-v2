@@ -3,9 +3,11 @@ import { ethers } from "ethers";
 import reactLogo from './assets/react.svg'
 import './styles/App.css'
 import { contractAbi, contractAddress } from '../constants'; 
+import Nfts from './pages/Nfts';
 
 function App() {
-  const [count, setCount] = useState(0); 
+  // const [count, setCount] = useState(0);
+  const [openseaLink, setOpenseaLink] = useState("");  
 
   const [walletConnected, setWalletConnected] = useState(false); 
 
@@ -58,13 +60,21 @@ function App() {
 
       const nftContract = new ethers.Contract(contractAddress, contractAbi, signer); 
 
-      const txn = await nftContract.mintNft(1, "Yay! by Steve", "Yay yay! The holidays are here", "https://imgur.com/j3CI7VT", {
+      console.log("Be patient, this may take a while.."); 
+
+      const txn = await nftContract.mintNft(3, "Hi by Steve", "This is me saying hi", "https://imgur.com/j3CI7VT.png",{
         value: ethers.utils.parseEther("0.01")
       }); 
+
+      console.log("Almost there..."); 
 
       await txn.wait(); 
 
       console.log("NFT minted successfully!"); 
+
+      setOpenseaLink(`https://testnets.opensea.io/assets/goerli/${contractAddress}/${0}`);
+
+      return openseaLink; 
     } catch(error) { 
       console.log("Sorry transaction failed...")
       console.error(error); 
@@ -103,9 +113,19 @@ function App() {
         } 
         {
           walletConnected && (
-            <button onClick={mintNft}>
+            <button onClick={ mintNft}>
               Mint an NFT
             </button>
+          )
+        }
+        {/* {
+          walletConnected && (
+            <Nfts /> 
+          )
+        } */}
+        {
+          walletConnected && (
+            <p>{ openseaLink }</p>
           )
         }
         <p>
