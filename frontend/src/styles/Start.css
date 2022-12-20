@@ -23,8 +23,8 @@
 }
 
 .start-intro p {
-    text-align: center;
-    font-size: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .start-prompts {
@@ -34,4 +34,16 @@
   background-color: rgb(236, 236, 112);
   border: none;
   border-radius: 6px;
+}
+
+.button-connect {
+  background-color: azure;
+  border: none;
+  padding: 20px; 
+  border-radius: 6px;
+}
+
+.button-connect:hover {
+  border: 1px solid #000;
+  cursor: pointer;
 }
