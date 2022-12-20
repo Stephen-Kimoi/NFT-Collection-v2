@@ -68,9 +68,12 @@ contract MoensNFTs is ERC721URIStorage {
           json = "https://www.jsonkeeper.com/b/HG7W"; 
        } else if (_tokenId == 3) {
            json = "https://www.jsonkeeper.com/b/X7VS"; 
-       }
+       } else if (_tokenId == 4) {
+           json = "https://www.jsonkeeper.com/b/C7OS"; 
+       } 
 
        console.log("An NFT with ID of %s has been minted to %s", _tokenId, msg.sender); 
+
        return json;  
     }   
 }
