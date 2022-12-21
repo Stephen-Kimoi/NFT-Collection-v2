@@ -1,41 +1,48 @@
-import React from 'react'; 
+import React, { useState } from 'react'; 
+import { data } from '../assets/Data/Data';
+import hi from '../assets/Images/hi.png'
 import '../styles/Nfts.css'; 
 
-const nftData  = [
-  {
-    name: "Hi by Steve",
-    description: "This is me saying hi to you", 
-    image: "https://imgur.com/j3CI7VT.png"
-  }, 
-  {
-    name: "SMH by Steve",
-    description: "Ah!! Really, was that necessary!", 
-    image: "https://imgur.com/ZzGpVtJ.png"
-  }, 
-  {
-    name: "Robot by Steve",
-    description: "I am now a robot!", 
-    image: "https://i.imgur.com/jgVjdzm.png"
-  }
-]
 
-const Nfts = () => {
+
+const Nfts = (props) => {
+  const [hoveredIndex, setHoveredIndex] = useState(-1); 
   
-  const nftDivs = nftData.map( data => {
-                    return (
-                      <div className="nft-div"> 
-                        <p>{ data.name }</p>
-                        <p>{ data.description }</p>
-                        <img src={data.image } />
-                      </div>
-                    )
-                  })
+   
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index); 
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(-1); 
+  }
+
+  const nftDiv = data.map( one => {
+    return (
+      <div 
+        className='nft-div' 
+        onMouseEnter={() => handleMouseEnter(one.id)} 
+        onMouseLeave={handleMouseLeave}
+      >
+        <img className='nft-image' src={hi} /> 
+        <p>{one.name}</p>
+        { 
+          hoveredIndex === one.id ? (
+            <div className='hover-div'>
+              <p>Price: 0.01 Ether</p>
+              <button onClick={props.mintNft} className="mint-button">Mint Nft</button>
+            </div>
+          ) : null 
+        }
+       </div>
+    )
+  })
 
 
   return (
-    <div>
+    <div className='nft-data'> 
       {
-        nftDivs
+        nftDiv
       }
     </div>
   )
