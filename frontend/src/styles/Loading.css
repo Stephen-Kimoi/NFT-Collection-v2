@@ -1,0 +1,39 @@
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+  }
+  
+  .loading-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+  }
+
+  .error-text, .success-text, .almost-text, .minting-text, .patience-text, .wallet-text {
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  .almost-text, .minting-text, .patience-text, .wallet-text {
+    background-color: white;
+  }
+
+  .error-text {
+    background-color: rgb(238, 105, 105);
+  }
+
+  .success-text {
+    background-color: rgb(47, 161, 47);
+  }
+  
