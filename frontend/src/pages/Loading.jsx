@@ -54,6 +54,8 @@ const Loading = (props) => {
             props.success && (
               <div className="success-text">
                 <p>NFT minted successfully 🥳</p>
+                <a href={`${props.openseaLink}`} target="_blank">View your NFT on opensea</a><br/>
+                <button>Go back</button>
               </div>
             )
         }

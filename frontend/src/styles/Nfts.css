@@ -30,9 +30,11 @@
   width: 35%;
 }
 
-/* .nft-div:hover {
-  width: 
-} */
+.nft-div:hover {
+  box-shadow: 1px 1px 16px -1px rgba(0,0,0,0.7);
+  border-radius: 10px;
+  padding: 10px;
+}
 
 .mint-button {
   background-color: rgb(195, 206, 206); 

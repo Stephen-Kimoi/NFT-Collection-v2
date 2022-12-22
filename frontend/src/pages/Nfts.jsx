@@ -1,6 +1,5 @@
 import React, { useState } from 'react'; 
 import { data } from '../assets/Data/Data';
-import hi from '../assets/Images/hi.png'
 import '../styles/Nfts.css'; 
 
 
@@ -24,13 +23,13 @@ const Nfts = (props) => {
         onMouseEnter={() => handleMouseEnter(one.id)} 
         onMouseLeave={handleMouseLeave}
       >
-        <img className='nft-image' src={hi} /> 
+        <img className='nft-image' src={one.image} /> 
         <p>{one.name}</p>
         { 
           hoveredIndex === one.id ? (
             <div className='hover-div'>
               <p>Price: 0.01 Ether</p>
-              <button onClick={props.mintNft} className="mint-button">Mint Nft</button>
+              <button onClick={() => props.mintNft(one.id)} className="mint-button">Mint Nft</button>
             </div>
           ) : null 
         }

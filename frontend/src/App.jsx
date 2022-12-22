@@ -64,7 +64,7 @@ function App() {
     }
   }
 
-  const mintNft = async () => {
+  async function mintNft(id) {
     setIsLoading(true)
     setMintingNft(true)
     console.log("Minting an nft...")
@@ -78,7 +78,7 @@ function App() {
       setPatience(true); 
       console.log("Be patient, this may take a while.."); 
 
-      const txn = await nftContract.mintNft(3, "Hi by Steve", "This is me saying hi", "https://imgur.com/j3CI7VT.png",{
+      const txn = await nftContract.mintNft(id, "Hi by Steve", "This is me saying hi", "https://imgur.com/j3CI7VT.png",{
         value: ethers.utils.parseEther("0.01")
       }); 
       
@@ -92,7 +92,7 @@ function App() {
       setSuccess(true); 
       console.log("NFT minted successfully!"); 
 
-      setOpenseaLink(`https://testnets.opensea.io/assets/goerli/${contractAddress}/${0}`);
+      setOpenseaLink(`https://testnets.opensea.io/assets/goerli/${contractAddress}/${id}`);
 
       return openseaLink; 
     } catch(error) { 
@@ -145,6 +145,7 @@ function App() {
             patience={patience} 
             almost={almost}
             connectingWallet={connectingWallet}
+            openseaLink={openseaLink}
           />
         )
       }
@@ -155,28 +156,18 @@ function App() {
         ) : 
         <div className='app-heading'>
           <h2>MOENS NFT COLLECTION</h2>
+          <p>Hover on the NFT to check its price and mint it!</p>
         </div>
       }
 
 
       <div className="app-nfts">
-        {/* {
-          walletConnected && (
-            <button onClick={ mintNft}>
-              Mint an NFT
-            </button>
-          )
-        } */}
         {
           walletConnected && (
             <Nfts mintNft={mintNft}/> 
           )
         }
-        {
-          walletConnected && (
-            <p>{ openseaLink }</p>
-          )
-        }
+      
         
       </div>
     </div>

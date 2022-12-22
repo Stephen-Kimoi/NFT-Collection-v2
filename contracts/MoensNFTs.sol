@@ -70,7 +70,41 @@ contract MoensNFTs is ERC721URIStorage {
            json = "https://www.jsonkeeper.com/b/X7VS"; 
        } else if (_tokenId == 4) {
            json = "https://www.jsonkeeper.com/b/C7OS"; 
-       } 
+       } else if (_tokenId == 5) {
+           json = "https://jsonkeeper.com/b/QYU0"; 
+       } else if (_tokenId == 6) {
+           json = "https://jsonkeeper.com/b/R196"; 
+       } else if (_tokenId == 7) {
+           json = "https://jsonkeeper.com/b/C0OD"; 
+       } else if (_tokenId == 8) {
+           json = "https://jsonkeeper.com/b/LOGZ"; 
+       } else if (_tokenId == 9) {
+           json = " https://jsonkeeper.com/b/EXP5"; 
+       } else if (_tokenId == 10) {
+           json = "https://jsonkeeper.com/b/KBGO"; 
+       } else if (_tokenId == 11) {
+           json = "https://jsonkeeper.com/b/1N8H"; 
+       } else if (_tokenId == 12) {
+           json = "https://jsonkeeper.com/b/5QN4"; 
+       } else if (_tokenId == 13) {
+           json = "https://jsonkeeper.com/b/6BNZ"; 
+       } else if (_tokenId == 14) {
+           json = "https://jsonkeeper.com/b/K5GD"; 
+       } else if (_tokenId == 15) {
+           json = "https://jsonkeeper.com/b/3OWB"; 
+       } else if (_tokenId == 16) {
+           json = "https://jsonkeeper.com/b/GO18"; 
+       }else if (_tokenId == 17) {
+           json = "https://jsonkeeper.com/b/TK89"; 
+       }else if (_tokenId == 18) {
+           json = "https://jsonkeeper.com/b/TTZF"; 
+       }else if (_tokenId == 19) {
+           json = "https://jsonkeeper.com/b/UMNB";  
+       } else if (_tokenId == 20) {
+           json = "https://jsonkeeper.com/b/A3JK"; 
+       } else if (_tokenId == 21) {
+           json = "https://jsonkeeper.com/b/2CRQ"; 
+       }
 
        console.log("An NFT with ID of %s has been minted to %s", _tokenId, msg.sender); 
 
