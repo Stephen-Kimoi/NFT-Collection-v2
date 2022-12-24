@@ -5,11 +5,12 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol"; 
 import "hardhat/console.sol";
 import { Base64 } from "./libraries/Base64.sol"; 
 
 
-contract MoensNFTs is ERC721URIStorage {
+contract MoensNFTs is ERC721URIStorage, IERC721Enumerable {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
     uint256 public _price = 0.01 ether; 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { data } from '../assets/Data/Data';
 import '../styles/Nfts.css'; 
 
@@ -16,6 +16,10 @@ const Nfts = (props) => {
     setHoveredIndex(-1); 
   }
 
+  useEffect(() => {
+    // console.log("Minted NFTs: ", props.mintedNfts)
+  })
+
   const nftDiv = data.map( one => {
     return (
       <div 
@@ -27,9 +31,12 @@ const Nfts = (props) => {
         <p>{one.name}</p>
         { 
           hoveredIndex === one.id ? (
-            <div className='hover-div'>
-              <p>Price: 0.01 Ether</p>
-              <button onClick={() => props.mintNft(one.id)} className="mint-button">Mint Nft</button>
+            <div>
+              {/* <div className='minted'>minted</div> */}
+              <div className='hover-div'>
+                <p>Price: 0.01 Ether</p>
+                <button onClick={() => props.mintNft(one.id)} className="mint-button">Mint Nft</button>
+              </div>
             </div>
           ) : null 
         }

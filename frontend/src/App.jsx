@@ -18,6 +18,7 @@ function App() {
   const [success, setSuccess] = useState(false); 
   const [error, setError] = useState(false); 
   const [connectingWallet, setConnectingWallet] = useState(false); 
+  const [mintedNfts, setMintedNfts] = useState([]);
 
   // Connect wallet
   const connectWallet = async () => {
@@ -78,6 +79,10 @@ function App() {
       setPatience(true); 
       console.log("Be patient, this may take a while.."); 
 
+      const nft = await nftContract.getNft(id); 
+
+      console.log("THe NFT is: ", nft); 
+
       const txn = await nftContract.mintNft(id, "Hi by Steve", "This is me saying hi", "https://imgur.com/j3CI7VT.png",{
         value: ethers.utils.parseEther("0.01")
       }); 
@@ -92,25 +97,51 @@ function App() {
       setSuccess(true); 
       console.log("NFT minted successfully!"); 
 
+      setMintedNfts(prevMintedNfts => [...prevMintedNfts, id])
+
       setOpenseaLink(`https://testnets.opensea.io/assets/goerli/${contractAddress}/${id}`);
 
       return openseaLink; 
     } catch(error) { 
+      setPatience(false); 
       setError(true); 
       console.log("Sorry transaction failed...")
       console.error(error); 
     }
 
+  } 
+
+  const goBack = () => {
+    setIsLoading(false); 
+    setSuccess(false); 
+    setError(false); 
   }
 
-  
-  // Render Methods
-  // const renderNotConnectedContainer = () => (
-  //   <button className="cta-button connect-wallet-button" onClick={connectWallet}>
-  //     Connect to Wallet
-  //   </button>
-  // );
-  
+  // async function getAllNfts() {
+  //   try {
+  //     const signer = await getProviderOrSigner(true); 
+
+  //     const nftContract = new ethers.Contract(contractAddress, contractAbi, signer); 
+
+  //     // const totalSupply = await nftContract.totalSupply(); 
+
+  //     const events = await nftContract.getPastEvents("Mint"); 
+
+  //     const nfts = []; 
+
+  //     for(let i = 0; i < events.length; i++){
+  //       // const id = await nftContract.tokenByIndex(i); 
+  //       const id = events[i].returnValues._tokenId; 
+  //       nfts.push(id)
+  //     }
+
+  //     console.log("Minted nfts: ", nfts); 
+  //   } catch (error) {
+  //     console.error(error); 
+  //   }
+  // }
+
+
 
   useEffect( () => {
 
@@ -128,8 +159,9 @@ function App() {
         console.log("Kindly switch to goerli!"); 
       }
     }
-
+    
     checkProviders(); 
+    // getAllNfts(); 
 
   }, [])
 
@@ -146,6 +178,7 @@ function App() {
             almost={almost}
             connectingWallet={connectingWallet}
             openseaLink={openseaLink}
+            goBack={goBack}
           />
         )
       }
@@ -164,7 +197,9 @@ function App() {
       <div className="app-nfts">
         {
           walletConnected && (
-            <Nfts mintNft={mintNft}/> 
+            <Nfts 
+              mintNft={mintNft}
+              /> 
           )
         }
       

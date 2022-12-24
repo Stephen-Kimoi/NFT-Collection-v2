@@ -23,6 +23,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 
   .almost-text, .minting-text, .patience-text, .wallet-text {
@@ -35,5 +38,26 @@
 
   .success-text {
     background-color: rgb(47, 161, 47);
+    width: 40vw;
+  }
+
+  .success-text a {
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    text-decoration: none;
+    color: #000;
+    background-color: aliceblue;
+    padding: 5px;
+    margin-top: 10px;
+  }
+
+  .success-text button, .error-text button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    height: 3.5vh;
+    cursor: pointer;
+    margin: 5px;
   }
   

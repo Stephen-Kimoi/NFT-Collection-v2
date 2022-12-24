@@ -55,7 +55,7 @@ const Loading = (props) => {
               <div className="success-text">
                 <p>NFT minted successfully 🥳</p>
                 <a href={`${props.openseaLink}`} target="_blank">View your NFT on opensea</a><br/>
-                <button>Go back</button>
+                <button onClick={props.goBack}>Go back</button>
               </div>
             )
         }
@@ -63,6 +63,7 @@ const Loading = (props) => {
             props.error && (
               <div className="error-text">
                 <p>Opps! An error occured 😕 <br/> Try again in a few minutes</p>
+                <button onClick={props.goBack}>Go back</button>
               </div>
             )
         }
