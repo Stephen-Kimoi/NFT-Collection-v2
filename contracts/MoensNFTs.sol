@@ -10,10 +10,11 @@ import "hardhat/console.sol";
 import { Base64 } from "./libraries/Base64.sol"; 
 
 
-contract MoensNFTs is ERC721URIStorage, IERC721Enumerable {
+contract MoensNFTs is ERC721URIStorage {
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
     uint256 public _price = 0.01 ether; 
+    uint[] public mintedNfts;  
 
     constructor() ERC721("MoensNFT", "MFT"){
         console.log("I am about to create some NFTs!!"); 
@@ -53,6 +54,8 @@ contract MoensNFTs is ERC721URIStorage, IERC721Enumerable {
 
        _setTokenURI(itemId, finalTokenURI); 
 
+       mintedNfts.push(id);
+
        _tokenIds.increment();     
     } 
 
@@ -62,7 +65,7 @@ contract MoensNFTs is ERC721URIStorage, IERC721Enumerable {
        string memory json; 
 
        if (_tokenId == 0 ) {
-          json = "https://www.jsonkeeper.com/b/23TS"; 
+          json = " https://jsonkeeper.com/b/S2R1"; 
        } else if (_tokenId == 1 ) {
           json = "https://www.jsonkeeper.com/b/7E87"; 
        } else if (_tokenId == 2 ) {
@@ -111,4 +114,8 @@ contract MoensNFTs is ERC721URIStorage, IERC721Enumerable {
 
        return json;  
     }   
+
+    function showMintedNfts() public view returns (uint[] memory){
+       return mintedNfts;
+    }
 }

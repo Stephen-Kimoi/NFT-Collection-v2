@@ -9,10 +9,22 @@ async function main() {
     value: utils.parseEther("0.01")
   }); 
 
-  await txn.wait(); 
+  await txn.wait();
+
+
+  let txn2 = await nftContract.mintNft(1, "Hi by Steve", "This is me saying hi to you", "https://imgur.com/j3CI7VT", {
+    value: utils.parseEther("0.01")
+  }); 
+
+  await txn2.wait();
+
+  let mintedNfts = await nftContract.showMintedNfts(); 
+  
   
   // txn = await nftContract.mintNft(); 
   // await txn.wait(); 
+
+  console.log("IDs of minted NFTs are: ", mintedNfts); 
 
   console.log("Contract deployed to: ", nftContract.address); 
 }

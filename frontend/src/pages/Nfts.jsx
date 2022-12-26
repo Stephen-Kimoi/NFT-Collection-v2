@@ -16,11 +16,8 @@ const Nfts = (props) => {
     setHoveredIndex(-1); 
   }
 
-  useEffect(() => {
-    // console.log("Minted NFTs: ", props.mintedNfts)
-  })
-
   const nftDiv = data.map( one => {
+    const isMinted = props.mintedNfts.includes(one.id);
     return (
       <div 
         className='nft-div' 
@@ -32,10 +29,12 @@ const Nfts = (props) => {
         { 
           hoveredIndex === one.id ? (
             <div>
-              {/* <div className='minted'>minted</div> */}
-              <div className='hover-div'>
-                <p>Price: 0.01 Ether</p>
-                <button onClick={() => props.mintNft(one.id)} className="mint-button">Mint Nft</button>
+              { isMinted && (<div className='minted'>MINTED</div>)}
+              <div>
+                <div className='hover-div'>
+                  <p>Price: 0.01 Ether</p>
+                  <button onClick={() => props.mintNft(one.id)} className="mint-button">Mint Nft</button>
+                </div>
               </div>
             </div>
           ) : null 

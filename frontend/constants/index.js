@@ -1,4 +1,4 @@
 import { abi } from '../utils/MoensNFTs.json'
 
-export const contractAddress = "0x8A1A76215344Af193C25A9e1413BC7157e3FC599"; 
+export const contractAddress = "0xA8E18CB9D8dbA3f225a833110f29eB975763B685"; 
 export const contractAbi = abi;  

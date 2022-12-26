@@ -1,4 +1,5 @@
 import hi from '../Images/hi.png';
+import hi2 from '../Images/hi2.png';
 import smh from '../Images/smh.png'; 
 import robot from '../Images/robot.png';
 import ball from '../Images/ball.png';
@@ -27,7 +28,7 @@ import teehee from '../Images/teehee.png';
 export const data = [
     { 
         name: "Hi by Steve", 
-        image: hi, 
+        image: hi2, 
         id: 0, 
     }, 
     { 

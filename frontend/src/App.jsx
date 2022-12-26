@@ -20,6 +20,7 @@ function App() {
   const [connectingWallet, setConnectingWallet] = useState(false); 
   const [mintedNfts, setMintedNfts] = useState([]);
 
+
   // Connect wallet
   const connectWallet = async () => {
     setIsLoading(true); 
@@ -30,6 +31,8 @@ function App() {
       const { ethereum } = window;  
     
       const accounts = await ethereum.request({method: "eth_requestAccounts"}); 
+      
+      getMintedNfts(); 
 
       console.log("Wallet connected successully..."); 
       setWalletConnected(true); 
@@ -79,9 +82,9 @@ function App() {
       setPatience(true); 
       console.log("Be patient, this may take a while.."); 
 
-      const nft = await nftContract.getNft(id); 
+      const event = await nftContract.emit("Transfer")
 
-      console.log("THe NFT is: ", nft); 
+      console.log("The event is: ", event); 
 
       const txn = await nftContract.mintNft(id, "Hi by Steve", "This is me saying hi", "https://imgur.com/j3CI7VT.png",{
         value: ethers.utils.parseEther("0.01")
@@ -92,12 +95,12 @@ function App() {
       console.log("Almost there..."); 
 
       await txn.wait(); 
+
+      getMintedNfts(); 
       
       setAlmost(false); 
       setSuccess(true); 
       console.log("NFT minted successfully!"); 
-
-      setMintedNfts(prevMintedNfts => [...prevMintedNfts, id])
 
       setOpenseaLink(`https://testnets.opensea.io/assets/goerli/${contractAddress}/${id}`);
 
@@ -117,29 +120,36 @@ function App() {
     setError(false); 
   }
 
-  // async function getAllNfts() {
-  //   try {
-  //     const signer = await getProviderOrSigner(true); 
+  async function getMintedNfts() {
+    try {
+      const signer = await getProviderOrSigner(true); 
 
-  //     const nftContract = new ethers.Contract(contractAddress, contractAbi, signer); 
+      const nftContract = new ethers.Contract(contractAddress, contractAbi, signer); 
 
-  //     // const totalSupply = await nftContract.totalSupply(); 
+      const mintedNfts = await nftContract.showMintedNfts(); 
 
-  //     const events = await nftContract.getPastEvents("Mint"); 
+      for(let i = 0; i < mintedNfts.length; i++){
+        const number = Number(mintedNfts[i])
+        setMintedNfts(prevMintedNfts => [...prevMintedNfts, number])
+        // console.log(`Minted NFT ${i} is: `, number)
+      }
 
-  //     const nfts = []; 
+      // const number1 = Number(mintedNfts[0]); 
+      // const number2 = Number(mintedNfts[1]); 
+      // const number3 = Number(mintedNfts[2]); 
+      // const number4 = Number(mintedNfts[3]); 
+      // const number5 = Number(mintedNfts[4]); 
 
-  //     for(let i = 0; i < events.length; i++){
-  //       // const id = await nftContract.tokenByIndex(i); 
-  //       const id = events[i].returnValues._tokenId; 
-  //       nfts.push(id)
-  //     }
+      // console.log("Number1 is: ", number1); 
+      // console.log("Number2 is: ", number2); 
+      // console.log("Number3 is: ", number3); 
+      // console.log("Number4 is: ", number4); 
+      // console.log("Number5 is: ", number5); 
 
-  //     console.log("Minted nfts: ", nfts); 
-  //   } catch (error) {
-  //     console.error(error); 
-  //   }
-  // }
+    } catch (error) {
+      console.error(error); 
+    }
+  }
 
 
 
@@ -198,6 +208,7 @@ function App() {
         {
           walletConnected && (
             <Nfts 
+              mintedNfts={mintedNfts}
               mintNft={mintNft}
               /> 
           )

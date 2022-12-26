@@ -11,7 +11,7 @@ const Start = (props) => {
 
      <div className='start-intro'>
        <img src="./intro.png" />
-       <p>Hey there!<br/> Welcome to Moens NFT collection.<br/>Kindly follow the prompts.</p>
+       <p>Hey there!<br/> Welcome to Moens NFT collection.<br/>Kindly follow the prompts.<br/>Remember to check out the <a target="_blank" href="https://github.com/Stephen-Kimoi/NFT-Collection-v2#readme">documentation</a> before getting started</p>
      </div>
 
      {
