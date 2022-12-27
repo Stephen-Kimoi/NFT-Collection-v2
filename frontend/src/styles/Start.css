@@ -9,7 +9,7 @@
 }
 
 .start-heading {
-  margin: 30px;
+  margin: 20px;
   color: aliceblue;
   text-shadow: 5px 4px 8px #666;
   font-weight: 200;
@@ -52,4 +52,17 @@
 .button-connect:hover {
   border: 1px solid #000;
   cursor: pointer;
+}
+
+@media all and (max-width: 480px) { 
+  .start-heading {
+    text-align: center;
+    margin-bottom: 20px;
+  } 
+  .start-intro {
+    margin-bottom: 20px;
+  }
+  .start-intro p {
+    font-size: 1rem;
+  }
 }
