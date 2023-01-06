@@ -10,13 +10,15 @@ import "hardhat/console.sol";
 import { Base64 } from "./libraries/Base64.sol"; 
 
 
-contract MoensNFTs is ERC721URIStorage {
+contract MoensNFTs is ERC721 {
+    // ERC721URIStorage public erc721UriStorage; 
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
     uint256 public _price = 0.01 ether; 
     uint[] public mintedNfts;  
 
     constructor() ERC721("MoensNFT", "MFT"){
+        // erc721UriStorage = new ERC721URIStorage("MoensNFT", "MFT"); 
         console.log("I am about to create some NFTs!!"); 
     }
 
@@ -52,7 +54,8 @@ contract MoensNFTs is ERC721URIStorage {
 
        tokenURI(itemId); 
 
-       _setTokenURI(itemId, finalTokenURI); 
+    //    erc721UriStorage.setTokenURI(itemId, finalTokenURI); 
+
 
        mintedNfts.push(id);
 
@@ -117,5 +120,10 @@ contract MoensNFTs is ERC721URIStorage {
 
     function showMintedNfts() public view returns (uint[] memory){
        return mintedNfts;
+    }
+
+    function showBalance() external view {
+        uint256 balance = balanceOf(msg.sender); 
+        console.log("Balance is: ", balance); 
     }
 }
