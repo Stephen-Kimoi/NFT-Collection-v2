@@ -19,10 +19,10 @@ async function main() {
   await txn2.wait();
 
   let mintedNfts = await nftContract.showMintedNfts(); 
-  
-  
   // txn = await nftContract.mintNft(); 
   // await txn.wait(); 
+
+  await nftContract.showBalance(); 
 
   console.log("IDs of minted NFTs are: ", mintedNfts); 
 
